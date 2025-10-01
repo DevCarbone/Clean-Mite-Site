@@ -1,0 +1,730 @@
+/* ====================================================================== */
+/* 0. VARIÁVEIS, RESET E BASE (Core do Design e Estilos Globais)         */
+/* ====================================================================== */
+
+:root {
+    --color-primary-blue: #0077B6; /* Azul Principal (Clean Mite) */
+    --color-secondary-green: #6AA84F; /* Verde de Destaque (CTA/Mite) */
+    --color-text-gray: #555555; /* Cinza para textos e ícones */
+    --color-highlight-star: #FFC300; /* Amarelo/Estrela */
+    --font-primary: 'Poppins', sans-serif;
+    --header-height: 85px; /* Variável para a altura do header fixo (usada para correções) */
+}
+
+/* Estilos de Reset e Base */
+body {
+    font-family: var(--font-primary);
+    color: var(--color-text-gray);
+    margin: 0;
+    padding: 0;
+    /* CORREÇÃO 1 (Para o Header Fixo): Empurra o conteúdo principal para baixo */
+    padding-top: var(--header-height); 
+}
+
+/* Propriedades Globais de Layout */
+html {
+    scroll-behavior: smooth; /* Habilita rolagem suave ao clicar em âncoras */
+    /* CORREÇÃO 2 (Para os links): Garante que os títulos das seções não fiquem escondidos pelo header fixo */
+    scroll-padding-top: var(--header-height);
+}
+
+.section {
+    padding: 60px 5%; /* Espaçamento padrão para todas as seções */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section h2 {
+    font-size: 2.5em;
+    color: var(--color-primary-blue);
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 1. NAVEGAÇÃO FIXA (HEADER) E LINKS */
+/* ---------------------------------------------------------------------- */
+header {
+    background-color: transparent;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    position: fixed; /* Essencial para fixar no topo */
+    top: 0;
+    z-index: 1000; /* Garante que fique acima de todo o conteúdo */
+}
+
+/* Classe adicionada pelo JS/TS ao rolar a tela */
+header.scrolled {
+    background-color: white; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 1. NAVEGAÇÃO FIXA (HEADER) E LINKS - NOVO CÓDIGO COM ANIMAÇÃO */
+/* ---------------------------------------------------------------------- */
+
+/* ---------------------------------------------------------------------- */
+/* 1. NAVEGAÇÃO FIXA (HEADER) E LINKS - NOVO CÓDIGO COM ANIMAÇÃO SLIDE */
+/* ---------------------------------------------------------------------- */
+
+/* Estilo Base dos Links */
+.nav-links a {
+    position: relative; /* Essencial para o sublinhado animado */
+    color: var(--color-text-gray);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 5px 10px;
+    margin: 0 5px;
+    
+    /* Adiciona transições para cor e elevação */
+    transition: color 0.3s ease-in-out, transform 0.2s; 
+    
+    display: inline-block;
+}
+
+/* Efeito de Hover/Foco nos Links (Texto e Elevação) */
+.nav-links a:not(.btn-whatsapp):hover,
+.nav-links a:not(.btn-whatsapp):focus {
+    color: var(--color-primary-blue); 
+    transform: translateY(-1px); 
+    /* Adiciona uma sombra sutil ao texto para um efeito 3D suave */
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); 
+}
+
+/* --- ANIMAÇÃO DE SUBLINHADO SLIDE (Desliza da Esquerda para Direita) --- */
+
+/* Cria o elemento que será o sublinhado */
+.nav-links a:not(.btn-whatsapp)::after {
+    content: '';
+    position: absolute;
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    height: 3px; /* Um pouco mais grossa para visualização do deslizamento */
+    background-color: var(--color-secondary-green); /* Verde de Destaque */
+    
+    /* Estado inicial: a linha está invisível (escondida na esquerda) */
+    transform: scaleX(0); 
+    
+    /* Define a transição para a animação da linha */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Curva de animação profissional */
+    
+    /* Faz com que a linha cresça a partir da esquerda (slide) */
+    transform-origin: left; 
+}
+
+/* Estado final: a linha aparece (largura total) */
+.nav-links a:not(.btn-whatsapp):hover::after,
+.nav-links a:not(.btn-whatsapp):focus::after {
+    transform: scaleX(1); /* Faz a linha deslizar da esquerda para a direita */
+}
+
+/* Botão de Destaque para Orçamento (WhatsApp) - Mantido */
+.btn-whatsapp {
+    background-color: var(--color-secondary-green);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer; 
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; 
+}
+
+.btn-whatsapp:hover {
+    background-color: #4C8E39; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+}
+/* ---------------------------------------------------------------------- */
+/* EFEITO DE CLIQUE JS/TS */
+/* ---------------------------------------------------------------------- */
+
+/* Classe ativada pelo JS/TS ao pressionar o botão */
+.btn-whatsapp.pressed, 
+.btn-primary.pressed {
+    /* Comprime o botão ligeiramente para dar o feedback de clique */
+    transform: scale(0.98) translateY(1px) !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5) inset; /* Adiciona uma sombra interna */
+    opacity: 0.95;
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Transição rápida para a compressão */
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 2. MENU RESPONSIVO (HAMBURGER) */
+/* ---------------------------------------------------------------------- */
+.menu-toggle {
+    display: none; 
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-primary-blue);
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Exibe o botão hamburger no mobile */
+    }
+
+    .nav-links {
+        display: none; /* Oculta os links por padrão */
+        position: absolute;
+        top: var(--header-height); /* Posiciona abaixo do header (usa a variável) */
+        left: 0;
+        width: 100%;
+        background-color: white; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        padding: 10px 0;
+        text-align: center;
+        transition: all 0.3s ease;
+    }
+
+    /* Classe ativada pelo JS/TS para MOSTRAR o menu */
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .nav-links a {
+        padding: 15px 0;
+        border-bottom: 1px solid #070707;
+    }
+    
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .logo {
+        max-width: 150px;
+    }
+}
+
+
+/* ====================================================================== */
+/* 3. SEÇÃO HOME (HERO) - Estilo Full-Width e CTA Forte                  */
+/* ====================================================================== */
+.hero-section {
+    min-height: 90vh; 
+    /* Coloque aqui o background: url('imagens/fundo-estofado-limpo.jpg') ... */
+    background-size: cover; 
+    background-color: rgba(0, 119, 182, 0.7); /* Overlay Azul */
+    background-blend-mode: multiply; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding-top: var(--header-height);
+}
+/* Layout História com Imagem */
+.historia-com-imagem {display: flex; gap: 40px; align-items: flex-start; margin-top: 30px;}
+.historia-texto {flex: 2;}
+.historia-imagem-box {flex: 1; max-width: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);}
+.historia-imagem-box img {width: 100%; height: auto; display: block; transition: transform 0.5s;}
+.historia-imagem-box:hover img {transform: scale(1.05);}
+.img-responsive {max-width: 100%; height: auto;}
+
+@media (max-width: 900px) {
+    .historia-com-imagem {flex-direction: column;}
+    .historia-texto {order: 2;}
+    .historia-imagem-box {order: 1; max-width: 100%; margin-bottom: 20px;}
+    .mvv-container-horizontal {flex-direction: column; gap: 15px;}
+}
+.hero-content {
+    max-width: 900px;
+    padding: 20px;
+    color: white; 
+}
+
+.hero-content h1 {
+    font-size: 3.5em;
+    margin-bottom: 0.3em;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6);
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.6em;
+    margin-bottom: 2em;
+    font-weight: 300;
+}
+
+/* Estilo do botão CTA principal (Maior) */
+.hero-cta {
+    font-size: 1.4em;
+    padding: 18px 40px;
+    background-color: var(--color-secondary-green);
+    border-radius: 50px; 
+}
+
+.hero-cta:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+/* Estilo para o Bloco de Destaques/Garantia */
+.hero-highlights {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 1.1em;
+    font-weight: 500;
+    flex-wrap: wrap; 
+    background-color: rgba(255, 255, 255, 0.1); 
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 4. SEÇÃO QUEM SOMOS - História e MVV Centralizados (Estilo Total Clean)*/
+/* ---------------------------------------------------------------------- */
+.quem-somos-section {
+    background-color: #f0f0f0; 
+    padding: 0; 
+}
+
+.quem-somos-banner {
+    /* GARANTIA DE PONTA A PONTA */
+    width: 100vw; 
+    margin-left: calc(50% - 50vw); 
+
+    /* BORDAS FINAS (2px) */
+    border-top: 2px solid #0056b3; 
+    border-bottom: 2px solid #0056b3; 
+    
+    /* AJUSTE: DIMINUI O ESPAÇAMENTO INTERNO (MARGEM VIRTUAL) */
+    padding: 10px 0; /* Diminuído para 10px em cima e embaixo */
+    
+    /* Configurações visuais (mantidas) */
+    background-color: #f0f8ff; 
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Opcional: Garante que o H2 não tenha margens extras */
+.quem-somos-banner h2 {
+    margin: 0;
+    padding: 0 20px;
+    font-size: 1.8em;
+    color: #003366; 
+}
+
+/* Bloco que limita a largura do conteúdo (simula o card principal) */
+.quem-somos-conteudo-central {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 5%;
+    padding-bottom: 60px;
+}
+
+.historia-missao h3 {
+    color: var(--color-primary-blue);
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+}
+
+/* Título de Sub-Seção (Nossa Trajetória) */
+.historia-titulo {
+    font-size: 2em !important;
+    text-align: left !important;
+    border-bottom: 2px solid var(--color-secondary-green);
+    padding-bottom: 5px;
+    margin-top: 50px !important;
+}
+
+.historia-missao p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: justify;
+    color: var(--color-text-gray);
+}
+
+/* Estilo MVV - Cards Horizontais */
+.mvv-container-horizontal {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 50px;
+    flex-wrap: wrap; 
+}
+
+.mvv-container-horizontal .mvv-item {
+    flex: 1; 
+    min-width: 250px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: none; 
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.mvv-container-horizontal .mvv-item:hover {
+    transform: none; 
+    border-color: var(--color-secondary-green); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mvv-container-horizontal .mvv-item h4 {
+    color: var(--color-primary-blue);
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+.mvv-container-horizontal .mvv-item::before {
+    /* Remove os pseudo-elementos de ícones para um visual mais limpo (Total Clean Style) */
+    content: none !important; 
+}
+/* Layout História com Imagem */
+.historia-com-imagem {display: flex; gap: 40px; align-items: flex-start; margin-top: 30px;}
+.historia-texto {flex: 2;}
+.historia-imagem-box {flex: 1; max-width: 400px; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);}
+.historia-imagem-box img {width: 100%; height: auto; display: block; transition: transform 0.5s;}
+.historia-imagem-box:hover img {transform: scale(1.05);}
+.img-responsive {max-width: 100%; height: auto;}
+
+@media (max-width: 900px) {
+    .historia-com-imagem {flex-direction: column;}
+    .historia-texto {order: 2;}
+    .historia-imagem-box {order: 1; max-width: 100%; margin-bottom: 20px;}
+    .mvv-container-horizontal {flex-direction: column; gap: 15px;}
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 5. SEÇÃO SERVIÇOS (Adaptado do bloco 6 original) */
+/* ---------------------------------------------------------------------- */
+.services-section {
+    background-color: white; 
+    text-align: center;
+}
+
+.service-intro {
+    font-size: 1.1em;
+    color: var(--color-text-gray);
+    margin-bottom: 50px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.service-card {
+    background-color: #f7f7f7; 
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    border-bottom: 4px solid transparent;
+}
+
+.service-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-bottom-color: var(--color-primary-blue);
+}
+
+.service-icon {
+    font-size: 3em;
+    color: var(--color-secondary-green); 
+    margin-bottom: 15px;
+    line-height: 1;
+}
+
+.service-card h4 {
+    color: var(--color-primary-blue); 
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.service-cta-link {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.service-cta-link a {
+    color: var(--color-secondary-green);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 6. SEÇÃO CTA DE DESTAQUE */
+/* ---------------------------------------------------------------------- */
+.cta-section {
+    background-color: var(--color-primary-blue);
+    color: white;
+    text-align: center;
+    padding: 80px 5%;
+}
+
+.cta-content h2 {
+    color: white; 
+    font-size: 2.2em;
+    margin-bottom: 15px;
+}
+
+.cta-content p {
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Estilo específico para o botão CTA dentro desta seção */
+.cta-btn {
+    font-size: 1.3em;
+    padding: 15px 40px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 7. SEÇÃO CONTATO */
+/* ---------------------------------------------------------------------- */
+.contato-section {
+    background-color: white; 
+}
+
+.contato-intro {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+}
+
+.contato-flex {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.contato-form-container, .contato-info-container {
+    flex: 1; 
+}
+
+.contato-form-container h3, .contato-info-container h3 {
+    color: var(--color-primary-blue);
+    border-bottom: 2px solid var(--color-secondary-green);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+/* Estilo do Formulário */
+.contato-form input[type="text"],
+.contato-form input[type="email"],
+.contato-form input[type="tel"],
+.contato-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; 
+    font-family: var(--font-primary);
+}
+
+.btn-primary {
+    display: inline-block;
+    background-color: var(--color-primary-blue);
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-decoration: none;
+}
+
+.btn-primary:hover {
+    background-color: #005A8D; 
+}
+
+/* Estilo das Informações Diretas */
+.info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.info-icon {
+    font-size: 1.8em;
+    color: var(--color-secondary-green);
+    margin-right: 15px;
+    line-height: 1;
+}
+
+.info-item strong {
+    color: var(--color-primary-blue);
+    display: block;
+    margin-bottom: 3px;
+}
+
+.contato-info-container a {
+    color: var(--color-text-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.contato-info-container a:hover {
+    color: var(--color-primary-blue);
+}
+
+
+/* ---------------------------------------------------------------------- */
+/* 8. RODAPÉ (FOOTER) - TODO EM BRANCO */
+/* ---------------------------------------------------------------------- */
+footer {
+    /* Fundo em Azul Principal (Clean Mite) */
+    background-color: var(--color-primary-blue); 
+    color: white; /* Cor do texto principal (padrão) */
+    padding: 50px 5%;
+    font-size: 0.95em;
+    border-top: 5px solid var(--color-secondary-green); /* Detalhe em verde */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Títulos (Navegação, Fale Conosco) */
+.footer-content h4 {
+    color: white; /* Garante que os títulos sejam brancos */
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    /* Deixando a borda mais clara para o fundo branco */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5); 
+    padding-bottom: 5px;
+}
+
+/* Links de Navegação e Contato (Texto) */
+.footer-links a, .footer-contact a {
+    display: block;
+    color: white; /* Força os links a serem brancos (incluindo WhatsApp e Email) */
+    text-decoration: none;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+/* Efeito de Hover: O link deve mudar de cor para se destacar */
+.footer-links a:hover, .footer-contact a:hover {
+    color: var(--color-secondary-green); /* Destaque em Verde (Mite) no hover */
+    text-decoration: underline;
+}
+
+/* Estilo para direitos autorais */
+.footer-logo p {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: white; /* Garante que o texto de direitos autorais seja branco */
+}
+
+/* Responsividade (Mantenha as regras anteriores) */
+@media (max-width: 700px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .footer-content h4 {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .footer-logo {
+        width: 100%;
+    }
+}
+
+/* ---------------------------------------------------------------------- */
+/* 9. RESPONSIVIDADE (MEDIA QUERIES) */
+/* ---------------------------------------------------------------------- */
+
+@media (max-width: 900px) {
+    /* Contato: Muda de 2 colunas para 1 coluna */
+    .contato-flex {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 800px) {
+    /* MVV Horizontal: Muda de 3 colunas para 1 coluna */
+    .mvv-container-horizontal {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 2.5em;
+    }
+    .hero-content p {
+        font-size: 1.3em;
+    }
+    .hero-cta {
+        font-size: 1.2em;
+        padding: 15px 30px;
+    }
+    .hero-highlights {
+        font-size: 1em;
+        gap: 15px;
+    }
+    
+    /* CTA Section */
+    .cta-content h2 {
+        font-size: 1.8em;
+    }
+    .cta-content p {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 700px) {
+    /* Rodapé: Muda para layout de coluna */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .footer-content h4 {
+        margin-top: 20px;
+        width: 100%;
+    }
+    .footer-logo {
+        width: 100%;
+    }
+}
