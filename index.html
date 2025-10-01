@@ -8,30 +8,42 @@
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
-    <header>
-        <nav id="navbar">
-            <a href="#home"><img src="imagens/logolimpo.png" alt="Clean Mite Logo" class="logo" width="30%" height="30%"></a>
-            
-            <button id="menu-toggle" class="menu-toggle" aria-label="Abrir Menu">☰</button> 
-            
-            <div id="nav-links" class="nav-links"> 
-                <a href="#home">Home</a> 
-                <a href="#quem-somos">Quem Somos</a>
-                <a href="#servicos">Serviços</a>
-                <a href="#contato">Contato</a>
-                <a href="https://wa.me/5511985642939" class="btn-whatsapp" target="_blank">Solicitar Orçamento</a>
-            </div>
-        </nav>
-    </header>
+<header class="futuristic-header">
+    <nav id="navbar">
+    <div class="nav-left">
+        </div>
+
+    <div class="nav-center">
+        <a href="#home" class="logo-link">
+            <img src="imagens/acaromini.png" alt="Clean Mite Logo" class="logo" width="20%" height="20%">
+        </a>
+        
+        <div id="nav-links" class="nav-links desktop-links"> 
+            <ul>
+                <li><a href="#home">Home</a></li> 
+                <li><a href="#quem-somos">Quem Somos</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav-right">
+        <a href="https://wa.me/5511985642939" class="btn-whatsapp" target="_blank">Orçamento Rápido</a>
+        
+        <button id="menu-toggle" class="menu-toggle" aria-label="Abrir Menu" aria-expanded="false">☰</button>
+    </div>
+</nav>
+</header>
 
     <main>
         <section id="home" class="hero-section">
-            <div class="historia-imagem-box">
-            <img src="imagens/fundo estofado limpo.png" alt="estofado limpo" class="img-limpo">
+            <div class="historia-imagem-">
+            <img src="imagens/fundo estofado limpo.png" alt="estofado limpo" class="img-limpo" width="100%" height="100%">
             </div>
             <div class="hero-content">
-                <h1>Diga adeus aos Ácaros e Olá ao Conforto!</h1>
-                <p>Higienização Profissional de Estofados, Colchões e Carpetes.</p>
+                <h1>Higienização Profissional de Estofados.</h1>
+    <p>Diga adeus aos ácaros e olá ao conforto.</p>
                 <a href="https://wa.me/5511985642939" class="btn-whatsapp hero-cta" target="_blank">
                     Solicitar Orçamento Agora
                 </a>
@@ -48,17 +60,15 @@
                 <div class="quem-somos-banner">
                     <h2>Nossa História e Compromisso</h2>
                 </div>
-                
-                <div class="quem-somos-conteudo-central">
+                                <div class="quem-somos-conteudo-central">
                     <div class="historia-missao">
                         
                         <h3>Missão, Visão e Valores</h3>
                         <div class="mvv-container-horizontal">
                             <div class="mvv-item missao"><h4>Missão</h4><p>Proporcionar uma experiência de excelência em higienização e impermeabilização, priorizando a saúde, tranquilidade e bem-estar dos nossos clientes.</p></div>
                             <div class="mvv-item visao"><h4>Visão</h4><p>Ser reconhecida nacionalmente como a empresa líder em tecnologia moderna e profissionalismo na limpeza de estofados.</p></div>
-                            <div class="mvv-item valores"><h4>Valores</h4><p><strong>Excelência</strong> no atendimento, **Segurança** e tranquilidade, **Pontualidade** e **Tratamento Cordial**.</p></div>
+                            <div class="mvv-item valores"><h4>Valores</h4><p>Excelência no atendimento, Segurança e tranquilidade, Pontualidade e Tratamento Cordial.</p></div>
                         </div>
-
                         <h3 class="historia-titulo">Nossa Trajetória</h3>
                         <div class="historia-com-imagem">
                             <div class="historia-texto">
@@ -80,35 +90,35 @@
                 <h2>Nossos Serviços</h2>
                 <p class="service-intro">Oferecemos soluções completas para a limpeza, desinfecção e proteção dos seus estofados, garantindo saúde e prolongando a vida útil dos seus móveis.</p>
                 
-                <div class="services-grid">
-                    
-                    <div class="service-card">
-                        <div class="service-image-container">
-                            <img src="imagens/servico-higienizacao-profunda.png" alt="Higienização de estofado com máquina extratora" class="service-image">
-                        </div>
-                        <div class="service-icon icon-limpeza">🧼</div> <h4>Higienização Profunda</h4>
-                        <p>O serviço essencial para a saúde. Removemos 100% dos ácaros, fungos, bactérias e sujidade pesada, eliminando odores e manchas com produtos de alta tecnologia.</p>
-                    </div>
+<div class="services-grid">
+    
+    <div class="service-card">
+        <div class="historia-imagem-box"> 
+            <img src="imagens/Higienização de estofado com máquina extratora.png" alt="Técnico CleanMite realizando higienização profunda de sofá" class="img-responsive">
+        </div>
+        <br>
+        <h4>Higienização Profunda</h4>
+        <p>O serviço essencial para a saúde. Removemos 100% dos ácaros, fungos, bactérias e sujidade pesada, eliminando odores e manchas com produtos de alta tecnologia.</p>
+    </div>
 
-                    <div class="service-card">
-                        <div class="service-image-container">
-                            <img src="imagens/servico-impermeabilizacao-premium.png" alt="Gotas de água em tecido impermeabilizado" class="service-image">
-                        </div>
-                        <div class="service-icon icon-protecao">🛡️</div>
-                        <h4>Impermeabilização Premium</h4>
-                        <p>Proteja seu investimento! Criamos uma barreira invisível que impede a absorção de líquidos e evita manchas acidentais, aumentando a durabilidade do tecido sem alterar sua textura.</p>
-                    </div>
-                    
-                    <div class="service-card">
-                        <div class="service-image-container">
-                            <img src="imagens/servico-limpeza-a-seco.png" alt="Limpeza a seco em carpete ou tecido delicado" class="service-image">
-                        </div>
-                        <div class="service-icon icon-seco">💨</div>
-                        <h4>Limpeza a Seco Especializada</h4>
-                        <p>Soluções específicas e delicadas para estofados, cortinas e tapetes que exigem pouca ou nenhuma umidade, como tecidos de seda, veludo ou linho finos.</p>
-                    </div>
-                </div>
-                
+    <div class="service-card">
+        <div class="historia-imagem-box"> 
+            <img src="imagens/Gotas de água em tecido impermeabilizado.png" alt="Gotas de água escorrendo em tecido de sofá impermeabilizado" class="img-responsive">
+        </div>
+        <br>
+        <h4>Impermeabilização Premium</h4>
+        <p>Proteja seu investimento! Criamos uma barreira invisível que impede a absorção de líquidos e evita manchas acidentais, aumentando a durabilidade do tecido sem alterar sua textura.</p>
+    </div>
+    
+    <div class="service-card">
+        <div class="historia-imagem-box"> 
+            <img src="imagens/Limpeza a seco em carpete ou tecido delicado.png" alt="Equipamento de limpeza a seco sendo usado em carpete ou tecido delicado" class="img-responsive">
+        </div>
+        <br>
+        <h4>Limpeza a Seco Especializada</h4>
+        <p>Soluções específicas e delicadas para estofados, cortinas e tapetes que exigem pouca ou nenhuma umidade, como tecidos de seda, veludo ou linho finos.</p>
+    </div>
+    </div>        
                 <div class="service-cta-link">
                     <p>Precisa de um serviço específico? <a href="https://wa.me/5511985642939" target="_blank">Fale com um consultor agora.</a></p>
                 </div>
@@ -156,7 +166,7 @@
     <footer>
         <div class="container footer-content">
             <div class="footer-logo">
-                <img src="imagens/logolimpo.png" alt="Clean Mite Logo" width="100px">
+                <img src="imagens/acaromini.png" alt="Clean Mite Logo" width="100px">
                 <p>&copy; 2025 Clean Mite. Todos os direitos reservados.</p>
             </div>
 
